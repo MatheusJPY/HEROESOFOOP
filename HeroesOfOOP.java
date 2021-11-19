@@ -10,6 +10,7 @@ public class HeroesOfOOP {
       Iniciar_jornada();
     }
     else if(opcao == 2){
+      System.exit(0);
     }
   }
   public static void clearScreen() {  
@@ -72,10 +73,25 @@ public class HeroesOfOOP {
     System.out.println("Ah A GUERRA COMECOU!\nPRIMEIRO TURNO");                          // OCORRENCIA DOS TURNOS
     Personagem dragao = new Dragao();
     while(dragao.getVIDA() > 0){
+      System.out.println("1- Comecar Round\n2- Sair do jogo");
+      int opcao = menu.nextInt();
+      if(opcao == 1){
+      }
+      else if(opcao == 2){
+        System.exit(0);
+      }
       if(numero_p == 1){                                                                   // 1 PERSONAGEM JOGANDO
         System.out.println(personagens[0].getNOME() + " VAI 1- ATACAR 2-DEFENDER");
         int acao = menu.nextInt();
-        if(acao == 1){
+        if(dragao.getVIDA() <= 0){
+          System.out.println("VITORA!!! " + dragao.getNOME() + " ESTA MORTO");
+          System.exit(0);
+        }
+        else if(personagens[0].getVIDA() <= 0){
+          System.out.println(personagens[0].getNOME() + " MORREU");
+          System.exit(0);
+        }
+        else if(acao == 1){
           dragao.setVIDA(personagens[0].atacar(dragao.getDEFESA()));
           clearScreen();
           System.out.println(personagens[0].getNOME()  + " ATACOU --> " + dragao.getNOME() +" VIDA ATUAL: "+ dragao.getVIDA());
@@ -85,20 +101,20 @@ public class HeroesOfOOP {
           personagens[0].defender();
           System.out.println(personagens[0].getNOME() + " SE DEFENDEU --|| DEF +10%");
         }
-        if(dragao.getVIDA() < 0){
-          clearScreen();
-          System.out.println("VITORA!!! " + dragao.getNOME() + " ESTA MORTO");
-        }
-        else if(personagens[0].getVIDA() < 0){
-          clearScreen();
-          System.out.println(personagens[0].getNOME() + " MORREU");
-        }
       }
       else if(numero_p == 2){                                                                   // 2 PERSONAGENS JOGANDO
         for (int i = 0; i <= 1; i++){
           System.out.println(personagens[i].getNOME() + " VAI 1- ATACAR 2-DEFENDER");
           int acao_1 = menu.nextInt();
-          if(acao_1 == 1){
+          if(dragao.getVIDA() <= 0){
+            System.out.println("VITORA!!! " + dragao.getNOME() + " ESTA MORTO");
+            System.exit(0);
+          }
+          else if(personagens[i].getVIDA() <= 0){
+            System.out.println(personagens[i].getNOME() + " MORREU");
+            System.exit(0);
+          }
+          else if(acao_1 == 1){
             dragao.setVIDA(personagens[i].atacar(dragao.getDEFESA()));
             clearScreen();
             System.out.println(personagens[i].getNOME()  + " ATACOU --> " + dragao.getNOME() +" VIDA ATUAL: "+ dragao.getVIDA());
@@ -108,20 +124,23 @@ public class HeroesOfOOP {
             clearScreen();
             System.out.println(personagens[i].getNOME() + " SE DEFENDEU --|| DEF +10%");
           }
-          if(dragao.getVIDA() < 0){
-            clearScreen();
-          }
-          else if(personagens[i].getVIDA() < 0){
-            clearScreen();
-            System.out.println(personagens[i].getNOME() + " MORREU");
-          }
         }
       }
-      else if(numero_p == 3){
-        for (int i = 0; i <= 2; i++){                                                         // 3 PERSONAGENS JOGANDO
+      else if(numero_p == 3){                                                                 // 3 PERSONAAGENS JOGANDO
+        for (int i = 0; i <= 2; i++){
           System.out.println(personagens[i].getNOME() + " VAI 1- ATACAR 2-DEFENDER");
           int acao_3 = menu.nextInt();
-          if(acao_3 == 1){
+          if(dragao.getVIDA() <= 0){
+            clearScreen();
+            System.out.println("VITORA!!! " + dragao.getNOME() + " ESTA MORTO");
+            System.exit(0);
+          }
+          else if(personagens[i].getVIDA() <= 0){
+            clearScreen();
+            System.out.println(personagens[i].getNOME() + " MORREU");
+            System.exit(0);
+          }                                                         // 3 PERSONAGENS JOGANDO
+          else if(acao_3 == 1){
             dragao.setVIDA(personagens[i].atacar(dragao.getDEFESA()));
             clearScreen();
             System.out.println(personagens[i].getNOME()  + " ATACOU --> " + dragao.getNOME() +" VIDA ATUAL: "+ dragao.getVIDA());
@@ -130,14 +149,6 @@ public class HeroesOfOOP {
             clearScreen();
             personagens[i].defender();
             System.out.println(personagens[i].getNOME() + " SE DEFENDEU --|| DEF +10%");
-            }
-            if(dragao.getVIDA() < 0){
-              clearScreen();
-              System.out.println("VITORA!!! " + dragao.getNOME() + " ESTA MORTO");
-            }
-            else if(personagens[i].getVIDA() < 0){
-              clearScreen();
-              System.out.println(personagens[i].getNOME() + " MORREU");
             }
         }
       }
